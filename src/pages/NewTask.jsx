@@ -114,7 +114,7 @@ export const NewTask = () => {
           <br />
 
           {/* 期限を設定するラベル */}
-          <label>期限設定(デフォルトでは，24時間後が設定されています)</label>
+          <label>期限設定(デフォルトでは, 24時間後が設定されています)</label>
           <br />
           <input
             type="datetime-local"

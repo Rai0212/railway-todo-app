@@ -127,7 +127,6 @@ export const EditTask = () => {
         <p className="error-message">{errorMessage}</p>
         <form className="edit-task-form">
           <label>タイトル</label>
-          <br />
           <input
             type="text"
             onChange={handleTitleChange}
@@ -136,7 +135,6 @@ export const EditTask = () => {
           />
           <br />
           <label>詳細</label>
-          <br />
           <textarea
             type="text"
             onChange={handleDetailChange}
@@ -147,7 +145,9 @@ export const EditTask = () => {
 
           {/* 期限を設定するラベル */}
           <label>
-            期限日時(完了を選び，更新を押せば，今の時間で終わったと記録されます)
+            期限日時
+            <br />
+            (完了を選び，更新を押せば，現在時刻で終わったと記録されます)
           </label>
           <br />
           <input

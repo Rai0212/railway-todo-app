@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .edit-task {
-  width: 1000px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -34,4 +34,23 @@
 
 .error-message {
   color: #ff3333;
+}
+
+label {
+  display: block;
+  width: 100%;
+  word-wrap: break-word; /* 長い単語を改行 */
+  word-break: break-all; /* 単語が長い場合も強制的に改行 */
+  white-space: normal; /* 改行を許可 */
+}
+
+// 特にフレキシブルにする必要なし
+/* スマートフォン (320px以上768px未満) */
+@media screen and (min-width: 320px) and (max-width: 767px) {
+
+}
+
+/* タブレット (768px以上1200px未満) */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+
 }

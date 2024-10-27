@@ -14,7 +14,9 @@ export const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [cookies] = useCookies();
+  
   const handleIsDoneDisplayChange = (e) => setIsDoneDisplay(e.target.value);
+
   useEffect(() => {
     axios
       .get(`${url}/lists`, {
@@ -65,6 +67,12 @@ export const Home = () => {
       });
   };
 
+  const handleKeyDown = (event, id) => {
+    if (event.key === 'Enter') {
+      handleSelectList(id);
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -90,9 +98,14 @@ export const Home = () => {
               return (
                 <li
                   key={key}
+                  role="tab"
+                  tabIndex={0} // フォーカス可能にする
+                  aria-selected={isActive} // 選択状態を示す
                   className={`list-tab-item ${isActive ? "active" : ""}`}
                   onClick={() => handleSelectList(list.id)}
+                  onKeyDown={(event) => handleKeyDown(event, list.id)} // Enterキーが押されたときの処理
                 >
+
                   {list.title}
                 </li>
               );
@@ -156,17 +169,13 @@ const Tasks = (props) => {
     // Math.floorで．整数値を返している
     const day = Math.floor(RT / 86400);
     const allhours = Math.floor(RT / 3600); // 3600(60X60)で割ることでhour(day分を含めた)を求めている
-    const hours = allhours - (day*24)
+    const hours = allhours - (day*24);
     const minutes = Math.floor((RT % 3600) / 60); // 3600で余りを出して，それを60で割ることで，minuteを求めている
 
-    if (hours < 1 && minutes >= 1)
-      return `${hours}時間 ${minutes}分, のこり1時間です. そろそろ急いで!`;
-    if (hours < 1 && minutes < 1)
-      return `${hours}時間 ${minutes}分, のこり1分を切っています!! まずいです!!`;
-    else return `${day}日${hours}時間${minutes}分`;
+    return `${day}日${hours}時間${minutes}分`;
   };
 
-  if (isDoneDisplay == "done") {
+  if (isDoneDisplay === "done") {
     return (
       <ul>
         {tasks
@@ -180,10 +189,11 @@ const Tasks = (props) => {
                 className="task-item-link"
               >
                 {task.title}
-                <br />
+                {"："}
                 {/* こっちは完了が選ばれる(task.doneは133行目より，trueのため) */}
-                {task.done ? "完了：" : "未完了"}
+                {task.done ? "完了" : "未完了"}
                 {/* タスクが終わった日を表示 */}
+                <br />
                 {"完了日時："}
                 {toJST(task.limit)}{" "}
               </Link>
@@ -206,14 +216,16 @@ const Tasks = (props) => {
               className="task-item-link"
             >
               {task.title}
-              <br />
+              {"："}
               {/* こっちは未完了が選ばれる(task.doneは151行目より，falseのため) */}
-              {task.done ? "完了" : "未完了："}
+              {task.done ? "完了" : "未完了"}
               {/* 期限を表示 */}
+              <br />
               {"期限："}
               {toJST(task.limit)}
               {/* 残り時間の表示 */}
-              {", 残り時間："}
+              <br />
+              {"残り時間："}
               {calculateRemainingTime(task.limit)}{" "}
             </Link>
           </li>
