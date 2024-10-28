@@ -14,7 +14,6 @@ export const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [cookies] = useCookies();
-  
   const handleIsDoneDisplayChange = (e) => setIsDoneDisplay(e.target.value);
 
   useEffect(() => {
@@ -96,9 +95,9 @@ export const Home = () => {
             {lists.map((list, key) => {
               const isActive = list.id === selectListId;
               return (
-                <li
+                <li // リストに対し，タブで選択できるよう以下のコードを追加
                   key={key}
-                  role="tab"
+                  role="tab" // 要素をタブのように扱えるように
                   tabIndex={0} // フォーカス可能にする
                   aria-selected={isActive} // 選択状態を示す
                   className={`list-tab-item ${isActive ? "active" : ""}`}
@@ -144,7 +143,7 @@ const Tasks = (props) => {
 
   // 日本のローカルタイムで表示
   const toJST = (dateString) => {
-    const jstDate = new Date(dateString);
+    const jstDate = new Date(dateString); // 日本時間に合わせる
 
     // ローカルタイムゾーンでのフォーマットを作成
     const year = jstDate.getFullYear();

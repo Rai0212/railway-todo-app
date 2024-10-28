@@ -23,8 +23,8 @@ export const EditTask = () => {
 
   const onUpdateTask = () => {
     const formattedLimit = isDone
-      ? new Date().toISOString()
-      : new Date(limit).toISOString(); // 完了時は現在の時間を設定，未完了時は選択した時間を設定
+      ? new Date() // 完了時は現在の時間を設定
+      : new Date(limit); // 未完了時はユーザーが選択した時間を設定
 
     const data = {
       title: title,

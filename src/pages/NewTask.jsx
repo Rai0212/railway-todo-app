@@ -26,7 +26,7 @@ export const NewTask = () => {
       title: title,
       detail: detail,
       done: false,
-      limit: new Date(limit).toISOString(), // 期限を表示できるよう，追加
+      limit: new Date(limit), // 期限を表示できるよう，追加
     };
 
     axios
@@ -60,7 +60,7 @@ export const NewTask = () => {
   }, []);
 
   useEffect(() => {
-    // 現在の日時を取得し、1日追加
+    // 現在の日時を取得し，1日追加
     // 1日先を初期値として設定！
     const now = new Date();
     const tomorrow = new Date(now);
@@ -112,7 +112,6 @@ export const NewTask = () => {
             className="new-task-detail"
           />
           <br />
-
           {/* 期限を設定するラベル */}
           <label>期限設定(デフォルトでは, 24時間後が設定されています)</label>
           <br />
@@ -122,7 +121,6 @@ export const NewTask = () => {
             value={limit}
           />
           <br />
-
           <button
             type="button"
             className="new-task-button"
