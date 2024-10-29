@@ -113,7 +113,7 @@ export const EditTask = () => {
     // Math.floorで，小数点以下を切り捨てて，整数値を返している
     const day = Math.floor(RT / 86400);
     const allhours = Math.floor(RT / 3600); // 3600(60X60)で割ることでhour(day分を含めた)を求めている
-    const hours = allhours - (day*24)
+    const hours = allhours - day * 24;
     const minutes = Math.floor((RT % 3600) / 60); // 3600で余りを出して，それを60で割ることで，minuteを求めている
 
     return `${day}日${hours}時間${minutes}分`;

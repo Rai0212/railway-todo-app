@@ -67,7 +67,7 @@ export const Home = () => {
   };
 
   const handleKeyDown = (event, id) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSelectList(id);
     }
   };
@@ -99,12 +99,11 @@ export const Home = () => {
                   key={key}
                   role="tab" // 要素をタブのように扱えるように
                   tabIndex={0} // フォーカス可能にする
-                  aria-selected={isActive} // 選択状態を示す
+                  aria-selected={isActive} // 選択状態を示す    
                   className={`list-tab-item ${isActive ? "active" : ""}`}
                   onClick={() => handleSelectList(list.id)}
                   onKeyDown={(event) => handleKeyDown(event, list.id)} // Enterキーが押されたときの処理
                 >
-
                   {list.title}
                 </li>
               );
@@ -168,7 +167,7 @@ const Tasks = (props) => {
     // Math.floorで．整数値を返している
     const day = Math.floor(RT / 86400);
     const allhours = Math.floor(RT / 3600); // 3600(60X60)で割ることでhour(day分を含めた)を求めている
-    const hours = allhours - (day*24);
+    const hours = allhours - day * 24;
     const minutes = Math.floor((RT % 3600) / 60); // 3600で余りを出して，それを60で割ることで，minuteを求めている
 
     return `${day}日${hours}時間${minutes}分`;
